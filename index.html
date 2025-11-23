@@ -49,28 +49,41 @@
         <img src="balaji.png" class="dev-image" alt="Divine image">
       </header>
 
-      <section class="hero">
-        <p class="blessing">With the divine blessings of</p>
-        <h2 class="temple">Sri Venkateshwara Swamy</h2>
+     <section class="hero">
+  <p class="blessing">With the divine blessings of</p>
+  <h2 class="temple">Sri Venkateshwara Swamy</h2>
 
-        <p class="invite-text">We joyfully invite you to celebrate the wedding ceremony of</p>
+  <p class="invite-text">We joyfully invite you to celebrate the wedding ceremony of</p>
 
-        <div class="names">
-          <span class="name main-name">Sateesh Kumar Pikkili</span><br>
-          <span class="and">&</span><br>
-          <span class="name main-name">Pikkili Sateesh Kumar</span>
-        </div>
+  <div class="names">
+    <span class="name main-name">Sateesh Kumar Pikkili</span><br>
+    <span class="and">&</span><br>
+    <span class="name main-name">Pikkili Sateesh Kumar</span>
+  </div>
 
-        <p class="muhurtham">27.11.2025, THURSDAY | 7:00 PM</p>
+  <p class="muhurtham">27.11.2025, THURSDAY | 7:00 PM</p>
 
-        <a class="map" href="#" target="_blank" rel="noopener">
-          <img src="loc.png" width="64" alt="Location">
-        </a>
-        <br>
-        <div class="countdown" id="countdown-timer" aria-live="polite">
-          00 D : 00 H : 00 M : 00 S
-        </div>
-      </section>
+  <!-- ===== Venue + Get Directions (replaces maps icon) ===== -->
+  <div class="venue" aria-label="Venue">
+    <div class="venue-title">Venue</div>
+    <div class="venue-name">Sri Venkateshwara Swamy Temple</div>
+    <div class="venue-address">Tirupati, Andhra Pradesh</div>
+
+    <!-- Google Maps directions link:
+         Edit the 'destination' query to your actual address (URL-encode spaces).
+         Example destination value used below: "Sri Venkateshwara Swamy Temple, Tirupati, Andhra Pradesh" -->
+    <a class="get-directions" 
+       href="https://www.google.com/maps/dir/?api=1&destination=Sri+Venkateshwara+Swamy+Temple,+Tirupati,+Andhra+Pradesh" 
+       target="_blank" rel="noopener">
+      ➜ Get Directions
+    </a>
+  </div>
+
+  
+  <div class="countdown" id="countdown-timer" aria-live="polite">
+    00 D : 00 H : 00 M : 00 S
+  </div>
+</section>
 
       <footer class="card-footer">
         <div class="footer-dancers">
