@@ -197,7 +197,7 @@ html,body{
     animation-duration: 12s;
 }
 /* hero / typography */
-.hero .blessing{ font-size:14px; color:rgba(255,255,255,.86); margin:6px 0; opacity:0; animation:fadeUp 1.4s forwards; animation-delay:.2s; z-index:14; }
+.hero .blessing{ font-size:14px; color:rgba(255,255,255,1); margin:6px 0; opacity:0; animation:fadeUp 1.4s forwards; animation-delay:.2s; z-index:14; }
 .hero .temple{
   font-size:36px;
   margin:0;
@@ -210,7 +210,7 @@ html,body{
 .names{  gap:12px; align-items:center; justify-content:center; margin:14px 0 8px; z-index:14; }
 .name.main-name{
   display:inline-block;
-  font-weight:700 !important;
+  font-weight:70 !important;
   font-size:35px;
   color:var(--accent);
   padding:2px 6px;
@@ -221,12 +221,12 @@ html,body{
 }
 
 /* muhurtham and countdown */
-.muhurtham{ margin-top:8px; color:rgba(255,255,255,.86); z-index:14; }
+.muhurtham{ margin-top:8px; color:rgba(255,255,255,.86); z-index:14; font-weight:700 !important;}
 .map{ display:inline-block; margin-top:10px; z-index:14; }
 
 /* countdown style */
 .countdown{
-  margin-top:12px;
+  margin-top:0px;
   font-weight:700;
   font-size:18px;
   color:var(--accent);
@@ -244,7 +244,7 @@ html,body{
   align-items:center;
   gap:14px;
   justify-content:center;
-  margin-top:18px;
+  margin-top:-15px;
   margin-bottom:34px !important;
   z-index:14;
 }
@@ -258,7 +258,7 @@ html,body{
   line-height:1.45;
   margin:0;
   font-size:13px;
-  color: rgba(255,255,255,.88);
+  color: rgba(255,255,255,1);
   max-width:520px;
   z-index:14;
   text-align: justify;
@@ -381,7 +381,7 @@ html,body{
 /* Preloader text */
 .preloader-heading{
   font-size: 35px;
-  color: var(--muted-2);
+  color: rgba(255,255,255,1);
   font-family: "Patrick Hand", cursive;
   line-height: 1.4;
   text-align: center;
@@ -436,7 +436,7 @@ img{ display:block; max-width:100%; }
 }
 html, body { font-family: var(--font-base); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .name.main-name { font-family: var(--font-script); }
-.hero .temple { font-family: var(--font-heading); font-weight: 700 !important; }
+.hero .temple,.venue-title{ font-family: var(--font-heading); font-weight: 700 !important; }
 .blessing, .invite-text, .countdown,.h1, .footer-note { font-family: var(--font-base); }
 h2,h3,h4,h5,h6, .name, .muhurtham{ font-family: var(--font-heading); }
 
@@ -453,5 +453,103 @@ body.loading .page-wrap *{
   pointer-events: none; /* prevent clicks while loading */
   user-select: none;
 }
+/* Venue block + Get Directions button */
+.venue{
+  margin-top: 3px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  z-index:14;
+}
+.venue-title{
+  font-size:12px;
+  letter-spacing:1px;
+  color: rgba(255,255,255,1);
+  position: relative;
+}
+.venue-name{
+  font-size:18px;
+  font-weight:700;
+  margin-top: 2px;
+  position: relative;   /* REQUIRED */
+}
 
+.venue-title::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-4px;
+  width:450%;
+  height:1px;
+  background:white;
+  opacity:1;
+}
+.venue-address{
+  color: rgba(255,255,255,0.65);
+  position: relative;
+  padding-bottom: 6px;
+}
+
+
+/* Get directions button */
+.get-directions{
+  margin-top:4px;
+  display:inline-block;
+  text-decoration:none;
+  padding:8px 8px;
+  border-radius:12px;
+  background: linear-gradient(180deg,#f7c6b3,#d89a87);
+  color:#fff;
+  font-weight:700;
+  box-shadow: 0 10px 28px rgba(0,0,0,.38);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.get-directions:active{ transform: translateY(1px) }
+.get-directions:hover{ transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,.48); }
 /* When loading removed, animations run as defined above. */
+/* Main names */
+.names .main-name{
+  color: var(--accent);      /* gold highlight */
+  font-weight: 800;
+}
+
+
+
+/* Temple name */
+.temple{
+  color: var(--accent);
+}
+
+/* Invite text */
+.invite-text{
+  color: rgba(255,255,255,1);
+}
+
+/* Date & time */
+.muhurtham{
+  color: rgba(255,255,255,1);
+  letter-spacing: 0.5px;
+}
+
+/* Venue block */
+.venue-title{
+  color: rgba(255,255,255,1);
+}
+
+.venue-name{
+  color: #rgba(255,255,255,0.1);     /* gold */
+  font-weight: 700;
+}
+
+.venue-address{
+  color: rgba(255,255,255,1);
+}
+
+/* Get Directions button */
+.get-directions{
+  background: linear-gradient(180deg,#d9b56b,#b8924a);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.2);
+}
