@@ -98,7 +98,7 @@ function animateIntro(){
 /* Countdown */
 function updateCountdown(){
   const el = $("#countdown-timer");
-  const wedding = new Date("Nov 27, 2025 19:00:00").getTime();
+  const wedding = new Date("Dec 05, 2025 19:32:00").getTime();
   const now = Date.now();
   const diff = wedding-now;
 
