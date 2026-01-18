@@ -206,9 +206,12 @@ body.loading .page-wrap * {
 	height: auto;
 	padding: 16px;
 	margin: 0 auto;
-
+background: linear-gradient(180deg, rgba(0, 0, 0, 0.65), rgba(3, 6, 8, 0.75)); 
+    
+    /* Ensure padding handles the content */
+    padding: 24px 16px; 
 	/* Background & Border */
-	background: linear-gradient(180deg, rgba(0, 0, 0, 0.46), rgba(3, 6, 8, 0.28));
+
 	background-clip: padding-box;
 	border-radius: var(--card-radius);
 	border: 2px solid rgba(255, 215, 135, 0.65) !important;
@@ -314,16 +317,63 @@ body.loading .page-wrap * {
 }
 
 /* Names Section */
+/* In styles.css */
 .names {
-	gap: 12px;
-	align-items: center;
-	justify-content: center;
-	margin: 14px 0 8px;
+    display: flex;
+    flex-direction: column; /* Forces vertical stacking */
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Space between Name 1, Heart, and Name 2 */
+    margin: 24px 0 24px; /* More breathing room top/bottom */
+}
+
+/* Hide the <br> tags via CSS so they don't mess up spacing */
+.names br {
+    display: none;
+}
+
+.name.main-name {
+    display: block; /* Ensures they take their own line */
+    font-family: var(--font-script);
+    font-size: 38px; /* Slightly larger */
+    line-height: 1.2;
+    color: var(--accent);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Better readability */
+}
+
+.heartbeat {
+    font-size: 24px;
+    margin: 5px 0; /* Space around the heart icon */
+    display: block;
 }
 
 .name,
 .muhurtham {
 	font-family: var(--font-heading);
+}
+/* In styles.css */
+.venue {
+    margin-top: 25px; /* Push away from the date */
+    display: flex; /* Changed from inline-flex to flex */
+    flex-direction: column;
+    gap: 10px; /* Consistent spacing between title, name, address */
+    align-items: center;
+    width: 100%;
+}
+
+.venue-name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 8px; /* Space after the "Venue" label */
+    color: #fceeb5; /* Slightly gold-white for distinction */
+    text-align: center;
+    line-height: 1.4;
+}
+
+.venue-address {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    margin-bottom: 12px; /* Space before the button */
 }
 
 .name.main-name {
@@ -403,7 +453,7 @@ body.loading .page-wrap * {
 	left: 50%;
 	transform: translateX(-50%);
 	bottom: -4px;
-	width: 450%;
+	width: 60px;
 	height: 1px;
 	background: white;
 }
