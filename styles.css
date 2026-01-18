@@ -401,7 +401,7 @@ body.loading .page-wrap * {
 	left: 50%;
 	transform: translateX(-50%);
 	bottom: -4px;
-	width: 400%;
+	width: 100%;
 	height: 1px;
 	background: white;
 }
