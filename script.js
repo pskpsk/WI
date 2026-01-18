@@ -36,7 +36,7 @@
       blocker.style.display = "flex";
       title.textContent = "📱 Open on Mobile";
       text.textContent =
-        "This invitation is designed for mobile phones only. Please scan the QR code below.";
+        "We have designed a special immersive experience for you. Please scan the QR code or open this link on your mobile phone in portrait mode.";
       qrWrap.style.display = "block";
       generateQR();
       document.body.style.overflow = "hidden";
