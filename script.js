@@ -307,7 +307,7 @@ function wireWishes() {
         if (thanks) { thanks.style.display = 'block'; }
 
         // <-- YOUR APPS SCRIPT URL (from deployment) -->
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwitvUfdApwgmCQNvbSO1OhxwKP8ljPrg-pTOSEN5pWcCnoCNsQ3J9E7aAPZZ2t2y7yvA/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDYhoB3inef_tZ1wA4vaHMMNnJofXUw8XszrBSmLSX1eXolNwSXMfuH6Cwp-10ibHa/exec';
 
         // Build GET URL
         const url = APPS_SCRIPT_URL + '?name=' + encodeURIComponent(name) + '&message=' + encodeURIComponent(message);
