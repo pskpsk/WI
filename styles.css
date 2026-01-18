@@ -404,7 +404,7 @@ body.loading .page-wrap * {
 	left: 50%;
 	transform: translateX(-50%);
 	bottom: -4px;
-	width: 450%;
+	width: 50%;
 	height: 1px;
 	background: white;
 }
@@ -895,4 +895,8 @@ body.loading .page-wrap * {
     height: 100%;
     overflow: hidden;
   }
-
+.hero p,
+.hero h2 {
+  line-height: 1;
+}
+	
