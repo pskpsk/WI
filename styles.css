@@ -261,7 +261,7 @@ body.loading .page-wrap * {
 .card-header .dev-image {
 	height: 120px;
 	width: auto;
-	margin: 1px auto 1px;
+	margin: 15px auto 1px;
 	opacity: .95;
 	z-index: 15;
 }
