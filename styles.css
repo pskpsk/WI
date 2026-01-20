@@ -1,0 +1,975 @@
+/* ==========================================================================
+   1. VARIABLES & FONTS
+   ========================================================================== */
+:root {
+	/* Colors */
+	--bg1: linear-gradient(180deg, #071718 0%, #061018 60%);
+	--accent: #f7c948;
+	--accent-gold: #f5c24a;
+	--muted-white: rgba(255, 255, 255, 0.92);
+	--muted-2: rgba(255, 255, 255, 0.8);
+
+	/* Dimensions & Motion */
+	--card-radius: 18px;
+	--transition: 300ms cubic-bezier(.16, .84, .44, 1);
+
+	/* Fonts */
+	--font-base: "Patrick Hand", cursive;
+	--font-heading: "Cinzel", serif;
+	--font-script: "Great Vibes", cursive;
+}
+
+/* ==========================================================================
+   2. BASE & RESET
+   ========================================================================== */
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	font-family: var(--font-base) !important;
+	color: var(--muted-white);
+	-webkit-font-smoothing: antialiased;
+	background: var(--bg1);
+	text-transform: none !important;
+}
+
+/* Pause animations during preload */
+body.loading .page-wrap,
+body.loading .page-wrap * {
+	pointer-events: none;
+	user-select: none;
+}
+
+/* ==========================================================================
+   3. BACKGROUND SCENE (Fixed Elements)
+   ========================================================================== */
+.bg-full {
+	position: absolute;
+	inset: 0;
+	opacity: 0.25;
+	z-index: -4 !important;
+	background: url("couple.png") center bottom/cover no-repeat fixed;
+	filter: brightness(.62) saturate(1.05);
+	pointer-events: none;
+	animation: kenBurns 25s infinite alternate ease-in-out;
+}
+
+.page-wrap {
+	min-height: 95vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 48px 20px;
+}
+
+/* Side Decorations */
+.side-image-left,
+.side-image-right {
+	position: absolute;
+	top: 25%;
+	width: 75px;
+	height: auto;
+	pointer-events: none;
+	filter: brightness(.9) saturate(1.05) drop-shadow(0 6px 12px rgba(0, 0, 0, .45));
+	z-index: -20 !important;
+	opacity: .15;
+}
+
+.side-image-left {
+	left: 0;
+}
+
+.side-image-right {
+	right: 0;
+}
+
+.side-image-left img,
+.side-image-right img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* Bottom Ornaments */
+.side-image-rightbo,
+.side-image-leftbo,
+.ornaments {
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	display: flex;
+	gap: 10px;
+	z-index: 6;
+	bottom: 10px !important;
+}
+
+.side-image-leftbo {
+	left: 0;
+}
+
+.side-image-rightbo {
+	right: 0;
+}
+
+.side-image-rightbo img,
+.side-image-leftbo img {
+	width: 100px;
+	opacity: .96;
+}
+
+.ornaments img {
+	width: 30px;
+	max-height: 54px;
+	opacity: .96;
+}
+
+/* Garlands */
+/* Garlands – locked to card */
+.garlands {
+	position: absolute;
+	top: 0px;
+	/* slight overlap inside card */
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	max-width: 100%;
+	z-index: 20;
+	pointer-events: none;
+}
+
+.garlands img {
+	width: 100%;
+	object-fit: contain;
+	opacity: .98;
+	filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .45));
+}
+
+/* Falling Flowers */
+#falling-flowers {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+	z-index: 20;
+}
+
+.flower-fall {
+	position: fixed;
+	top: 0px;
+	font-size: 15px;
+	opacity: .9;
+	will-change: transform, opacity;
+	animation: linear forwards flowerFall;
+}
+
+.flower-fall.spin1 {
+	animation-duration: 6s;
+}
+
+.flower-fall.spin2 {
+	animation-duration: 8s;
+}
+
+.flower-fall.spin3 {
+	animation-duration: 10s;
+}
+
+.flower-fall.spin4 {
+	animation-duration: 12s;
+}
+
+/* Sparkles */
+.sparkle {
+	position: fixed;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: radial-gradient(circle, #fff7c6, #f7c948 40%, #ffb547 70%);
+	box-shadow: 0 0 10px rgba(247, 201, 72, .9);
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* ==========================================================================
+   4. MAIN CARD COMPONENT
+   ========================================================================== */
+.card {
+	position: relative;
+	height: auto;
+	padding: 16px;
+	margin: 0 auto;
+	width: 100vw;
+	max-width: 100vw;
+	aspect-ratio: auto;
+	border-radius: 10px;
+
+	/* Background & Border */
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0.46), rgba(3, 6, 8, 0.28));
+	background-clip: padding-box;
+	border-radius: var(--card-radius);
+	border: 2px solid rgba(255, 215, 135, 0.65) !important;
+
+	/* Shadows / Glow */
+	box-shadow:
+		0 0 32px rgba(255, 200, 120, 0.55),
+		0 0 18px rgba(255, 190, 100, 0.45),
+		0 12px 36px rgba(0, 0, 0, 0.62),
+		inset 0 0 18px rgba(245, 194, 74, 0.04),
+		inset 0 0 16px rgba(255, 210, 140, 0.32),
+		inset 0 0 8px rgba(255, 180, 90, 0.28);
+
+	text-align: center;
+	overflow: visible;
+	z-index: 12 !important;
+
+	/* Entrance Animation */
+	transform: none !important;
+}
+
+body.loading .card {
+	animation: cardEnter 1.3s ease-out forwards;
+}
+
+body:not(.loading) .card {
+	animation: none;
+}
+
+/* Soft Outer Vignette */
+.card::before {
+	content: "";
+	position: absolute;
+	inset: -18px;
+	border-radius: inherit;
+	z-index: -2;
+	background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.48) 55%, rgba(0, 0, 0, 0.78) 100%);
+	filter: blur(18px);
+	pointer-events: none;
+}
+
+/* Warm Halo Behind Card */
+.card::after {
+	content: "";
+	position: absolute;
+	inset: -6px;
+	border-radius: inherit;
+	z-index: -1;
+	background: radial-gradient(circle, rgba(245, 194, 74, .28) 0, rgba(245, 194, 74, .12) 20%, transparent 55%);
+	filter: blur(20px);
+	mix-blend-mode: screen;
+	pointer-events: none;
+}
+
+/* Card Header Image */
+.card-header .dev-image {
+	height: 120px;
+	width: auto;
+	margin: 15px auto 15px;
+	z-index: 15;
+}
+
+/* ==========================================================================
+   5. TYPOGRAPHY & TEXT CONTENT
+   ========================================================================== */
+/* Hero Section */
+.hero .blessing {
+	font-family: var(--font-base);
+	font-size: 14px;
+	color: #fff;
+	margin: 0;
+}
+
+.hero .temple {
+	font-family: var(--font-heading);
+	font-size: 36px;
+	margin: 0;
+	color: var(--accent-gold);
+	text-shadow: 0 6px 20px rgba(0, 0, 0, .6);
+}
+
+.shimmer-text {
+	background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+	background-size: 200% auto;
+	color: #000;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: shimmer 3s linear infinite;
+}
+
+/* Invite Text */
+.invite-text {
+	margin: 16px auto 10px;
+	max-width: 420px;
+	font-size: 16px;
+	line-height: 1.7;
+	color: rgba(255, 255, 255, 0.9);
+	text-align: center;
+	font-family: var(--font-base);
+	letter-spacing: 0.4px;
+	text-shadow: 0 0 10px rgba(247, 201, 72, 0.12);
+}
+
+/* Names Section */
+.names {
+	gap: 12px;
+	align-items: center;
+	justify-content: center;
+	margin: 14px 0 8px;
+	line-height: 1.5;
+}
+
+.name,
+.muhurtham {
+	font-family: var(--font-heading);
+}
+
+.name.main-name {
+	display: inline-block;
+	font-family: "Great Vibes", cursive;
+	font-size: clamp(30px, 7vw, 42px);
+	font-weight: 400;
+	letter-spacing: 0.04em;
+	line-height: 1.1;
+	color: var(--accent);
+
+	/* ✨ Light white glow shadow */
+	text-shadow:
+		0 1px 4px rgba(255, 255, 255, 0.35),
+		0 0 8px rgba(255, 255, 255, 0.25);
+}
+
+.heartbeat {
+	display: inline-block;
+	color: var(--accent);
+	animation: beat 1.5s infinite ease-in-out;
+}
+
+/* Muhurtham & Countdown */
+.muhurtham {
+	margin-top: 8px;
+	color: #fff;
+	font-weight: 700 !important;
+}
+
+.countdown {
+	/* Layout */
+	display: inline-block;
+	/* Essential for transform animations to work */
+	margin-top: 4px;
+	/* Added slight spacing from element above */
+	padding: 4px 8px;
+	/* Increased padding for better readability (Pill shape) */
+
+	/* Typography */
+	font-weight: 700;
+	font-size: 18px;
+	color: white;
+
+	/* Visuals */
+	background: linear-gradient(90deg, rgba(0, 0, 0, .22), rgba(255, 255, 255, .02));
+	border-radius: 2px;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, .48);
+	backdrop-filter: blur(4px);
+}
+
+
+/* Venue */
+.venue {
+	margin-top: 3px;
+	display: inline-flex;
+	flex-direction: column;
+	gap: 4px;
+	align-items: center;
+}
+
+.venue-title {
+	font-family: var(--font-heading);
+	font-size: 18px;
+	letter-spacing: 1px;
+	color: #fff;
+	position: relative;
+}
+
+.venue-title::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: -4px;
+	width: 100%;
+	height: 1px;
+	background: white;
+}
+
+.venue-name {
+	font-size: 18px;
+	font-weight: 700;
+	margin-top: 2px;
+}
+
+.venue-address {
+	color: #fff;
+}
+
+/* ==========================================================================
+   6. BUTTONS & INTERACTION
+   ========================================================================== */
+/* Get Directions Button (Consolidated) */
+.get-directions {
+	position: relative;
+	margin-top: 4px;
+	display: inline-block;
+	text-decoration: none;
+	padding: 8px 8px;
+	border-radius: 12px;
+	background: linear-gradient(180deg, #d9b56b, #b8924a);
+	color: #fff;
+	font-weight: 700;
+	box-shadow: 0 10px 28px rgba(0, 0, 0, .38);
+	overflow: hidden;
+	/* For the shine effect */
+	animation: wiggle 4s infinite;
+}
+
+.get-directions:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 16px 40px rgba(0, 0, 0, .48);
+}
+
+/* Shine effect on button */
+.get-directions::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 50%;
+	height: 100%;
+	background: linear-gradient(to right,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.4) 50%,
+			rgba(255, 255, 255, 0) 100%);
+	transform: skewX(-25deg);
+	animation: shineSweep 4s infinite;
+}
+
+/* Floating Buttons */
+.floating-button,
+.floating-wishes-button {
+	position: fixed;
+	bottom: 18px;
+	padding: 10px 12px;
+	border-radius: 12px;
+	border: 0;
+	cursor: pointer;
+	font-size: 18px;
+	background: linear-gradient(180deg, #0ea7ff, #007acc);
+	color: #fff;
+	box-shadow: 0 10px 38px rgba(0, 0, 0, .45);
+	transition: transform var(--transition), box-shadow var(--transition);
+	z-index: 60 !important;
+}
+
+.floating-button {
+	right: 18px;
+}
+
+.floating-wishes-button {
+	left: 18px;
+}
+
+/* ==========================================================================
+   7. FOOTER & POPUPS
+   ========================================================================== */
+.footer-dancers {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	justify-content: center;
+	margin-top: -15px;
+	margin-bottom: 34px !important;
+}
+
+.footer-dancers .dance {
+	max-width: 84px !important;
+	transform: scale(.96);
+	filter: saturate(.95) contrast(.98);
+	opacity: .98;
+	transform-origin: bottom center;
+}
+
+.footer-note {
+	font-family: var(--font-base);
+	line-height: 1.45;
+	margin: 0;
+	font-size: 13px;
+	color: #fff;
+	max-width: 520px;
+	text-align: justify;
+}
+
+/* Popups */
+.popup {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: min(420px, 92%);
+	max-width: 420px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, .98), rgba(255, 255, 255, .96));
+	color: #222;
+	border-radius: 12px;
+	padding: 18px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+	z-index: 9999;
+	display: none;
+}
+
+.popup .close {
+	position: absolute;
+	right: 10px;
+	top: 8px;
+	background: none;
+	border: 0;
+	font-size: 24px;
+	cursor: pointer;
+}
+
+.popup input,
+.popup textarea {
+	width: 100%;
+	padding: 10px;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	margin: 8px 0;
+	font-size: 14px;
+}
+
+.popup button {
+	width: 100%;
+	padding: 10px;
+	border-radius: 8px;
+	border: 0;
+	background: var(--accent);
+	color: #111;
+	font-weight: 700;
+}
+
+/* ==========================================================================
+   8. PRELOADER
+   ========================================================================== */
+#preloader {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(180deg, rgba(3, 10, 14, .96), rgba(2, 6, 8, .98));
+	z-index: 100000 !important;
+}
+
+.preloader-inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	transform: translateY(-5px);
+}
+
+.preloader-frame {
+	width: min(360px, 400vw);
+	max-width: 460px;
+	height: auto;
+	object-fit: contain;
+	margin-bottom: -150px;
+}
+
+.preloader-heading {
+	font-size: 35px;
+	color: #fff;
+	font-family: var(--font-base);
+	text-align: center;
+}
+
+/* ==========================================================================
+   9. ANIMATION KEYFRAMES
+   ========================================================================== */
+@keyframes flowerFall {
+	0% {
+		transform: translateY(-80px) rotate(0);
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateY(110vh) rotate(360deg);
+		opacity: 1;
+	}
+}
+
+@keyframes kenBurns {
+	0% {
+		transform: scale(1);
+	}
+
+	100% {
+		transform: scale(1.15);
+	}
+}
+
+@keyframes cardEnter {
+	0% {
+		opacity: 0;
+		transform: scale(.82) translateY(40px);
+		filter: blur(6px);
+	}
+
+	60% {
+		opacity: 1;
+		transform: scale(1.03);
+		filter: none;
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes textPop {
+	0% {
+		opacity: 0;
+		transform: scale(.85) translateY(20px);
+	}
+
+	60% {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes fadeUp {
+	0% {
+		opacity: 0;
+		transform: translateY(25px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes inviteFadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes bounceMusic {
+	0% {
+		transform: scale(0.96) translateY(0);
+	}
+
+	100% {
+		transform: scale(0.96) translateY(-6px) rotate(2deg);
+	}
+}
+
+@keyframes wiggle {
+
+	0%,
+	80%,
+	100% {
+		transform: rotate(0deg);
+	}
+
+	85% {
+		transform: rotate(-3deg);
+	}
+
+	90% {
+		transform: rotate(3deg);
+	}
+
+	95% {
+		transform: rotate(-3deg);
+	}
+}
+
+@keyframes shineSweep {
+	0% {
+		left: -100%;
+	}
+
+	20% {
+		left: 200%;
+	}
+
+	100% {
+		left: 200%;
+	}
+}
+
+@keyframes pulse-glow {
+	0% {
+		transform: scale(0.8);
+		box-shadow: 0 0 0 0 rgba(247, 201, 72, 0.4);
+	}
+
+	50% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(247, 201, 72, 0);
+	}
+
+	100% {
+		transform: scale(0.8);
+		box-shadow: 0 0 0 0 rgba(247, 201, 72, 0);
+	}
+}
+
+@keyframes beat {
+
+	0%,
+	100% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.3);
+		text-shadow: 0 0 10px var(--accent);
+	}
+}
+
+@keyframes shimmer {
+	to {
+		background-position: 200% center;
+	}
+}
+
+@keyframes sparkleRise {
+	0% {
+		opacity: 0;
+		transform: translateY(0) scale(.6);
+	}
+
+	10% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateY(-35vh) scale(1.3);
+	}
+}
+
+/* ==========================================================================
+   10. MEDIA QUERIES (Responsive)
+   ========================================================================== */
+@media (max-width: 760px) {
+	.name.main-name {
+		font-size: 30px;
+	}
+
+	.card {
+		border-radius: 10px;
+	}
+
+	.footer-dancers {
+		margin-bottom: 54px;
+	}
+}
+
+@media (max-width: 560px) {
+
+	/* Mobile Safe Card */
+	.card {
+		width: 90vw;
+		max-width: 90vw;
+		padding: 20px;
+		aspect-ratio: 3 / 4;
+		border-radius: 12px;
+	}
+
+	.hero .temple {
+		font-size: clamp(22px, 6.5vw, 30px);
+	}
+
+	.countdown {
+		font-size: 14px;
+		padding: 10px 14px;
+	}
+
+	.footer-dancers .dance {
+		max-width: 55px !important;
+	}
+
+	.ornaments img {
+		width: 34px;
+	}
+}
+
+/* ===============================
+   Balaji Zoom-In Divine Reveal
+================================ */
+
+.dev-image {
+	opacity: 0;
+	transform: scale(0.75);
+	transform-origin: center center;
+	transition:
+		opacity 1.3s ease-out,
+		transform 1.5s cubic-bezier(.18, .89, .32, 1.15);
+	will-change: transform, opacity;
+}
+
+.dev-image.show {
+	opacity: 1;
+	transform: scale(1);
+	animation: balajiGlow 3.5s ease-in-out infinite;
+}
+
+.footer-dancers .dance {
+	opacity: 0;
+	transform: scale(0.92);
+	transition: opacity 0.8s ease, transform 0.8s ease;
+	animation: none;
+}
+
+.footer-dancers .dance.show {
+	opacity: 1;
+	transform: scale(0.96);
+}
+
+.footer-dancers .dance.dancing {
+	animation: bounceMusic 1.2s infinite ease-in-out alternate;
+}
+
+/* ===============================
+   MOBILE PORTRAIT ONLY BLOCKER
+================================ */
+
+#device-blocker {
+	position: fixed;
+	inset: 0;
+	background: linear-gradient(180deg, #000, #111);
+	display: none;
+	align-items: center;
+	justify-content: center;
+	z-index: 999999;
+	text-align: center;
+	padding: 20px;
+}
+
+.device-box {
+	background: #111;
+	border: 2px solid #f7c948;
+	border-radius: 18px;
+	padding: 30px 22px;
+	max-width: 360px;
+	box-shadow: 0 0 45px rgba(247, 201, 72, 0.4);
+}
+
+.device-box h2 {
+	color: #f7c948;
+	font-size: 24px;
+	margin-bottom: 12px;
+}
+
+.device-box p {
+	color: #fff;
+	font-size: 15px;
+	line-height: 1.6;
+}
+
+/* Prevent landscape scrolling glitches */
+@media screen and (orientation: landscape) {
+	body {
+		overflow: hidden;
+	}
+}
+
+/* ===============================
+   QR CODE (DESKTOP BLOCK)
+================================ */
+
+#qr-wrap {
+	margin-top: 18px;
+}
+
+.qr-text {
+	font-size: 14px;
+	margin-bottom: 8px;
+	color: #fff;
+}
+
+#qr-img {
+	width: 160px;
+	height: 160px;
+	border-radius: 12px;
+	background: #fff;
+	padding: 8px;
+}
+
+/* Mobile-only layout tightening */
+@media (max-width: 560px) {
+
+	html,
+	body {
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.hero p,
+	.hero h2,
+	.venue {
+		line-height: 1;
+	}
+}
+
+/* Extra-small phones */
+@media (max-width: 360px) {
+	.name.main-name {
+		font-size: 26px;
+	}
+}
+
+/* ===============================
+   Story Reveal System (FINAL)
+================================ */
+
+.reveal {
+	opacity: 0;
+	transition: opacity 0.8s ease;
+}
+
+/* Slide-up ONLY for text/content */
+.reveal:not(.dev-image):not(.dance) {
+	transform: translateY(16px);
+	transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Shown state */
+.reveal.show {
+	opacity: 1;
+}
+
+/* Reset slide-up */
+.reveal.show:not(.dev-image):not(.dance) {
+	transform: translateY(0);
+}
