@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f4ede0">
+<title>Bindu &amp; Sateesh — Wedding Invitation</title>
+<meta name="description" content="Bindu &amp; Sateesh invite you to their wedding on Thursday, 11 February 2027, 11:30 AM at Imperial Convention, Kurnool.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bindu &amp; Sateesh — Wedding Invitation">
+<meta property="og:description" content="Thursday, 11 February 2027 · 11:30 AM · Imperial Convention, Kurnool. Tap to open the invitation.">
+<meta property="og:image" content="https://pskpsk.github.io/Testingb/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css?v=15">
+</head>
+<body>
+<div class="mandala bg-mandala" aria-hidden="true"></div>
+<div id="intro" class="intro">
+  <img class="intro-bg" src="assets/plate_ext.jpg" alt="">
+  <div class="mandala intro-mandala" aria-hidden="true"></div>
+  <div class="intro-rays" aria-hidden="true"></div>
+  <div class="stars" id="stars" aria-hidden="true"></div>
+  <div class="intro-card">
+    <img class="intro-ganesh" src="assets/medallion.png" alt="">
+    <p class="i-small">॥ Shree Ganeshaya Namah ॥</p>
+    <h1 class="i-names"><span data-f="name1"></span> <i>&amp;</i> <span data-f="name2"></span></h1>
+    <p class="i-small">You are invited to our</p>
+    <p class="i-event" data-f="event"></p>
+
+    <div class="gate" id="s-name">
+      <form id="g-form" novalidate>
+        <label class="g-label" for="g-name">Please enter your name</label>
+        <input id="g-name" class="g-in" name="name" type="text" maxlength="30" autocomplete="name" enterkeyhint="go" placeholder="Your name">
+        <p class="g-err" id="g-err" role="alert"></p>
+        <button class="open-btn" id="g-next" type="submit">CONTINUE</button>
+      </form>
+    </div>
+    <div class="gate" id="s-loc" hidden>
+      <p class="g-hello" id="g-hello"></p>
+      <p class="g-note">Allow location to see how far the venue is from you. It’s optional.</p>
+      <button class="open-btn" id="g-loc" type="button">📍 ALLOW LOCATION</button>
+      <p class="g-status" id="g-status" role="status"></p>
+      <button class="g-skip" id="g-skip" type="button">Continue without location</button>
+      <p class="g-priv" id="g-priv"></p>
+    </div>
+    <div class="gate" id="s-done" hidden>
+      <p class="g-hello" id="g-hello2"></p>
+      <p class="g-result" id="g-result"></p>
+      <button class="open-btn" id="open" type="button">OPEN INVITATION</button>
+    </div>
+  </div>
+</div>
+
+<div class="flash" id="flash"></div>
+<main class="page">
+  <div class="frame" id="frame">
+    <div class="curtain" id="curtain" aria-hidden="true">
+      <div class="cr-light"></div>
+      <div class="cr cl"></div>
+      <div class="cr rt"></div>
+      <img class="cr-toran" src="assets/toran.png" alt="">
+      <div class="cr-seal" id="cr-seal">
+        <img src="assets/medallion.png" alt="">
+        <p>॥ Shree Ganeshaya Namah ॥</p>
+        <p class="nm2" id="cr-names"></p>
+      </div>
+    </div>
+    <div class="poster" id="poster">
+      <div class="world">
+        <img class="plate" src="assets/plate_ext.jpg" alt="Wedding invitation of Bindu and Sateesh">
+        <div class="art" id="art">
+        <div id="layers"></div>
+        <div id="flames"></div>
+        <canvas id="scratch" class="scratch" width="1470" height="348" role="button" tabindex="0" aria-label="Scratch to reveal the wedding date. Press Enter to reveal."></canvas>
+        <div class="scratch-hint" aria-hidden="true"></div>
+        <div class="distpill" id="distpill"><span id="distText"></span></div>
+        <div id="text">
+          <div class="t sri" style="top:80px;--i:0"><span data-w="325">|| <i data-f="blessing"></i> ||</span></div>
+          <div class="pt" style="left:540px;top:105px;--i:0"><span><svg class="orn" width="232" height="16" viewBox="0 0 232 16"><path d="M0 8H100M132 8H232" stroke="#c0182b" stroke-width="1.6"/><path d="M116 1l7 7-7 7-7-7z" fill="#c0182b"/></svg></span></div>
+          <div class="t vs" style="top:137px;--i:1"><span data-w="500" data-f="verse1"></span></div>
+          <div class="t vs" style="top:174px;--i:1"><span data-w="640" data-f="verse2"></span></div>
+          <div class="t vs" style="top:211px;--i:2"><span data-w="152" data-f="verse3"></span></div>
+          <div class="t ttl" style="top:278px;--i:3"><span data-w="515" data-f="event"></span></div>
+          <div class="t of" style="top:341px;--i:4"><span>of</span></div>
+          <div class="t nm" style="top:405px;--i:5"><span data-w="575"><b data-f="name1"></b> <small>&amp;</small> <b data-f="name2"></b></span></div>
+          <div class="pt" style="left:540px;top:466px;--i:6"><span><svg class="orn" width="262" height="26" viewBox="0 0 262 26"><path d="M0 13H104M158 13H262" stroke="#143a30" stroke-width="1.8"/><path d="M131 2l9 11-9 11-9-11z" fill="#143a30"/><circle cx="110" cy="13" r="3.2" fill="#143a30"/><circle cx="152" cy="13" r="3.2" fill="#143a30"/><path d="M96 13c6-8 12 8 14 0M152 13c2 8 8-8 14 0" fill="none" stroke="#143a30" stroke-width="1.6"/></svg></span></div>
+          <i class="dl" style="left:462px;top:485px;height:92px;--i:7"></i><i class="dl" style="left:625px;top:485px;height:92px;--i:7"></i>
+          <div class="pt dw" style="left:372px;top:515px;--i:7"><span data-w="108" data-f="weekday"></span></div>
+          <div class="pt dw" style="left:372px;top:547px;--i:7"><span data-w="108" data-f="time"></span></div>
+          <div class="pt dn" style="left:543px;top:535px;--i:8"><span data-w="92" data-max="98" data-f="day"></span></div>
+          <div class="pt dw" style="left:716px;top:513px;--i:7"><span data-w="118" data-f="mon"></span></div>
+          <div class="pt dw" style="left:716px;top:551px;--i:7"><span data-w="88" data-f="year"></span></div>
+          <div class="pt vl" style="left:540px;top:628px;--i:9"><span data-w="160" data-f="venueLabel"></span></div>
+          <div class="t vn" style="top:672px;--i:10"><span data-w="370" data-f="venue"></span></div>
+          <div class="t ad" style="top:712px;--i:11"><span data-w="540" data-f="addr1"></span></div>
+        </div>
+        <div class="atm" aria-hidden="true">
+          <div class="rays"></div>
+          <div id="bokeh"></div>
+          <i class="sun"></i><i class="couple-glow"></i>
+          <i class="bloom" style="left:846px;top:1090px"></i>
+          <div id="butterflies"></div>
+        </div>
+        </div>
+        <div class="sweep"></div>
+        <div class="vig"></div>
+      </div>
+      <canvas id="fx" width="1080" height="1920"></canvas>
+      <div class="cd" id="cd" hidden>
+        <p class="cd-t" id="cd-t">Counting down to our big day</p>
+        <div class="cd-row" id="cd-row">
+          <div><b id="cd-d">0</b><span>Days</span></div>
+          <div><b id="cd-h">0</b><span>Hours</span></div>
+          <div><b id="cd-m">0</b><span>Mins</span></div>
+          <div><b id="cd-s">0</b><span>Secs</span></div>
+        </div>
+      </div>
+      <nav class="dock" id="dock" aria-label="Invitation actions">
+        <button class="dbtn sm" id="b-replay" type="button" aria-label="Replay animation" title="Replay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9M4 4v4.5h4.5"/></svg></button>
+        <button class="dbtn" id="b-cal" data-label="Calendar" type="button" aria-label="Add to calendar" title="Add to calendar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.2" fill="currentColor"/></svg></button>
+        <a class="dbtn" id="b-card" data-label="Card" href="assets/wedding-card.jpg" download="Bindu-Sateesh-Wedding-Card.jpg" aria-label="Download wedding card" title="Download wedding card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></a>
+        <a class="dbtn" id="b-map" data-label="Map" target="_blank" rel="noopener" aria-label="Open map" title="Open map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg></a>
+        <button class="dbtn" id="b-share" data-label="Share" type="button" aria-label="Share invitation" title="Share"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4M8 8l4-4 4 4M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg></button>
+        <button class="dbtn sm" id="b-snd" type="button" aria-label="Toggle sound" title="Sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 19V5L7.5 9.5H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/><path class="slash" d="M4 4l16 16"/></svg></button>
+      </nav>
+
+    </div>
+  </div>
+</main>
+<script src="script.js?v=15"></script>
+</body>
+</html>
