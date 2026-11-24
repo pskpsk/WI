@@ -1091,27 +1091,42 @@ $('#b-cal').addEventListener('click', () => {
     a.click();
     a.remove();
 });
+
 $('#b-share').addEventListener('click', async () => {
-    const d = {
+    const shareUrl = 'https://pskpsk.github.io/WI/';
+
+    const shareData = {
         title: CONFIG.name1 + ' & ' + CONFIG.name2 + ' — ' + CONFIG.event,
         text: 'You are invited to our ' + CONFIG.event + '!',
-        url: location.href
+        url: shareUrl
     };
+
+    // Open native sharing menu on Android/mobile
     if (navigator.share) {
         try {
-            await navigator.share(d);
-        } catch (e) {}
+            await navigator.share(shareData);
+        } catch (e) {
+            // User cancelled sharing
+        }
         return;
     }
+
+    // Fallback: copy invitation link
     try {
-        await navigator.clipboard.writeText(d.url);
-        const c = document.createElement('div');
-        c.className = 'copied';
-        c.textContent = 'Link copied';
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 1800);
-    } catch (e) {}
+        await navigator.clipboard.writeText(shareUrl);
+
+        const message = document.createElement('div');
+        message.className = 'copied';
+        message.textContent = 'Link copied';
+
+        document.body.appendChild(message);
+
+        setTimeout(() => message.remove(), 1800);
+    } catch (e) {
+        alert('Unable to share. Please copy this link:\n' + shareUrl);
+    }
 });
+
 $('#b-snd').addEventListener('click', () => {
     soundOn = !soundOn;
     $('#b-snd').classList.toggle('off', !soundOn);
